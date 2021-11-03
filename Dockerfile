@@ -9,7 +9,7 @@ COPY yarn.lock ./
 
 USER node
 
-RUN yarn --frozen-lockfile
+RUN yarn
 
 COPY --chown=node:node . .
 
