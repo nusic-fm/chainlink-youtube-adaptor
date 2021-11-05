@@ -18,7 +18,9 @@ const customParams = {
 
 const createRequest = (input, callback) => {
   // The Validator helps you validate the Chainlink request data
-  const validator = new Validator(callback, input, customParams);
+  //  TODO: Check validator
+  // const validator = new Validator(callback, input, customParams);
+  const validator = { validated: input };
   const jobRunID = validator.validated.id;
   const endpoint = validator.validated.data.endpoint || "channels";
   const url = `https://content-youtube.googleapis.com/youtube/v3/${endpoint}`;
