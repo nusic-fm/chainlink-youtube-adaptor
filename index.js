@@ -1,4 +1,5 @@
 const { Requester, Validator } = require("@chainlink/external-adapter");
+require("dotenv").config();
 
 // Define custom error scenarios for the API.
 // Return true for the adapter to retry.
@@ -12,7 +13,7 @@ const customError = (data) => {
 // with a Boolean value indicating whether or not they
 // should be required.
 const customParams = {
-  channelId: ["channelId"],
+  itemId: ["id", "channelId", "videoId"],
   endpoint: false,
 };
 
@@ -24,11 +25,10 @@ const createRequest = (input, callback) => {
   const jobRunID = validator.validated.id;
   const endpoint = validator.validated.data.endpoint || "channels";
   const url = `https://content-youtube.googleapis.com/youtube/v3/${endpoint}`;
-  const id = validator.validated.data.channelId;
+  const id = validator.validated.data.id;
   const part = "statistics";
-  console.log(validator.validated.data);
 
-  const key = "AIzaSyBK86jGrCR8lh5IVyKSohMN1Q2_tvUy2uA";
+  const key = process.env.YOUTUBE_API_KEY;
   const params = {
     id,
     part,
