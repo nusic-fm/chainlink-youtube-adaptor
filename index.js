@@ -1,5 +1,5 @@
-const { Requester, Validator } = require('@chainlink/external-adapter')
-// require('dotenv').config()
+const { Requester } = require('@chainlink/external-adapter')
+require('dotenv').config()
 
 // Define custom error scenarios for the API.
 // Return true for the adapter to retry.
@@ -28,7 +28,7 @@ const createRequest = (input, callback) => {
   const id = validator.validated.data.id
   const part = 'statistics'
 
-  const key = 'AIzaSyBK86jGrCR8lh5IVyKSohMN1Q2_tvUy2uA'
+  const key = process.env.YOUTUBE_API_KEY
   const params = {
     id,
     part,
