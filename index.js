@@ -1,6 +1,8 @@
 const { Requester } = require('@chainlink/external-adapter')
 require('dotenv').config()
+console.log({ log: process.env.YOUTUBE_API_KEY })
 
+const YOUTUBE_API_KEY = 'AIzaSyBK86jGrCR8lh5IVyKSohMN1Q2_tvUy2uA'
 // Define custom error scenarios for the API.
 // Return true for the adapter to retry.
 const customError = data => {
@@ -28,11 +30,11 @@ const createRequest = (input, callback) => {
   const id = validator.validated.data.id
   const part = 'statistics'
 
-  const key = process.env.YOUTUBE_API_KEY
+  const key = YOUTUBE_API_KEY
   const params = {
     id,
     part,
-    key,
+    key
   }
   // This is where you would add method and headers
   // you can add method like GET or POST and add it to the config
@@ -41,7 +43,7 @@ const createRequest = (input, callback) => {
   // headers = 'headers.....'
   const config = {
     url,
-    params,
+    params
   }
 
   // The Requester allows API calls be retry in case of timeout
@@ -82,7 +84,7 @@ exports.handlerv2 = (event, context, callback) => {
     callback(null, {
       statusCode: statusCode,
       body: JSON.stringify(data),
-      isBase64Encoded: false,
+      isBase64Encoded: false
     })
   })
 }
