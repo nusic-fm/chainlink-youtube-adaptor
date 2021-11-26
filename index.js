@@ -31,10 +31,17 @@ const createRequest = (input, callback) => {
   const part = 'statistics'
 
   const key = YOUTUBE_API_KEY
+
   const params = {
-    id,
     part,
     key
+  }
+  if (id.includes('user')) {
+    // https://www.youtube.com/user/HowieBVEVO
+    params.forUsername = id.split('user/')[1]
+  } else {
+    // https://www.youtube.com/channel/UCOmHUn--16B90oW2L6FRR3A
+    params.id = id.split('channel/')[1]
   }
   // This is where you would add method and headers
   // you can add method like GET or POST and add it to the config
@@ -53,7 +60,7 @@ const createRequest = (input, callback) => {
       // It's common practice to store the desired value at the top-level
       // result key. This allows different adapters to be compatible with
       // one another.
-      response.data.result = Requester.validateResultNumber(response.data, ['items', '0', 'statistics', 'viewCount'])
+      response.data.result = Requester.validateResultNumber(response.data, ['items', '0', 'statistics', 'subscriberCount'])
       callback(response.status, Requester.success(jobRunID, response))
     })
     .catch(error => {
