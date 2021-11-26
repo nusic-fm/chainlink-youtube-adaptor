@@ -19,6 +19,4 @@ COPY . .
 
 # COPY --chown=node:node . .
 
-ENV PORT 8080
-
 CMD node app.js
