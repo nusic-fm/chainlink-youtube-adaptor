@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const port = 8080
+const port = 80
 
 app.use(bodyParser.json())
 
